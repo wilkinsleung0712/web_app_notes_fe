@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="NoteApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My notes</title>
+    <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/note.css">
+</head>
+
+<body>
+    <div class="container ng-cloak" ng-controller="NoteCtrl">
+        <div class="row content">
+            <div class="clearfix addnew">
+                <div class="col-md-6 col-xs-6 ">
+                  <div ng-controller="ModalCtrl" class="container">
+                    <button type="button" class="btn  btn-note"  ng-click="open()">Add new note</button>
+                    <modal title="Login form" visible="showModal">
+                      <form role="form">
+
+                      </form>
+                    </modal>
+                  </div>
+                </div>
+                  <div class="col-md-6 col-xs-6">
+                    <div class="input-group search-box">
+                      <input type="text" class="form-control" placeholder="Search for..." ng-model="noteFilter">
+                      <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+                  </div>
+                </div>
+                <!-- <div class="col-md-12 column">
+                  <div class="container">
+
+                </div>
+              </div> -->
+            </div>
+            <div class="clearfix notelist col-md-12">
+                <div class="col-lg-3 col-md-6 col-sm-12" ng-repeat="note in allNotes | filter:noteFilter">
+                    <div class="note">
+                        <p class="title">{{note.title}}
+                          <div class="label label-success" ng-show="note.labelList.length" >
+                              <strong>{{note.labelList}}</strong>
+                          </div>
+                        </p>
+                        <span class="time col-xs-6">{{note.created | date:"medium"}}</span>
+                        <span  class="line col-xs-6"></span>
+                        <p class="note-content">
+                          {{note.content}}
+                        </p>
+                        <p>
+                          <div ng-controller="EditModalCtrl">
+                          <a href="#"><span class="glyphicon glyphicon-pencil pull-right" ng-click="open()">&nbsp;</span></a>
+                          <modal title="Login form" visible="showModal">
+                            <form role="form">
+
+                            </form>
+                          </modal>
+                        </div>
+                          <a href="#"><span class="glyphicon glyphicon-trash delete" ng-click="deleteNote(note)">&nbsp;</span></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+    <!-- main library import -->
+    <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular-ui-router/angular-ui-router.min.js"></script>
+    <!-- angular -->
+    <script type="text/javascript" src="js/app/app.js"></script>
+    <script type="text/javascript" src="js/directives/modal-directive.js"></script>
+    <script type="text/javascript" src="js/services/note-rest-service.js"></script>
+    <script type="text/javascript" src="js/controllers/note-ctrl.js"></script>
+    <script type="text/javascript" src="js/controllers/modal-ctrl.js"></script>
+    <script type="text/javascript" src="js/controllers/edit-modal-ctrl.js"></script>
+</html>
